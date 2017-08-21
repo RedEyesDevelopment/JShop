@@ -1,0 +1,14 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="rename_dept_column" author="sheng.w">
+        <renameColumn tableName="department" oldColumnName="name" newColumnName="dept_name" columnDataType="varchar(50)"/>
+    </changeSet>
+
+    <changeSet id="tag-1.1" author="sheng.w">
+        <tagDatabase tag="1.1" />
+    </changeSet>
+
+</databaseChangeLog>
