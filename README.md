@@ -1,6 +1,7 @@
 # JShop
 
 Github: https://github.com/RedEyesDevelopment/JShop
+
 Google Docs: https://drive.google.com/drive/folders/0BwSH90PjxkOLRmNtYUNndnVMWTg
 
 Created: 16.08.2017
