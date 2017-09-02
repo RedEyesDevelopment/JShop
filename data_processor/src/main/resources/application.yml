@@ -1,10 +1,10 @@
 #DATABASE PROPERTIES
 dataSource:
-  driverClassName: org.h2.Driver
-  url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-  username: sa
-  dialect: org.hibernate.dialect.H2Dialect
-  hbm2ddlAuto: none
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://127.0.0.1:5432/jshop?createDatabaseIfNotExist=true
+  username: dbadmin
+  password: jEvPjsm
+  dialect: org.hibernate.dialect.PostgreSQLDialect
   package: jshop.model
 
 #LOGGER PROPERTIES
