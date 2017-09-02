@@ -12,20 +12,18 @@ Yakimov Denis - denis.yakimov89@gmail.com - +380676832268
 
 
 
-
-
 Commit text:
-JShop
-${date}
-${author}
-${version}
-${branch task}
-
-${current branch situation}
-${current commit changes}
-${next task for this branch}
-
-${author comment}
+#####JShop
+#####${date}
+#####${author}
+#####${version}
+#####${branch task}
+#####
+#####${current branch situation}
+#####${current commit changes}
+#####${next task for this branch}
+#####
+#####${author comment}
 
 
 

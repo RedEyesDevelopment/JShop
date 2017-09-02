@@ -21,7 +21,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"qroktask"})
+@EnableJpaRepositories(basePackages = {"jshop"})
 public class JDBCConfiguration implements TransactionManagementConfigurer {
 
     @Value("${dataSource.driverClassName}")
@@ -30,6 +30,8 @@ public class JDBCConfiguration implements TransactionManagementConfigurer {
     private String url;
     @Value("${dataSource.username}")
     private String username;
+    @Value("${dataSource.password}")
+    private String password;
     @Value("${dataSource.dialect}")
     private String dialect;
     @Value("${dataSource.hbm2ddlAuto}")

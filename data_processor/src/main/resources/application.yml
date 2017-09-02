@@ -1,0 +1,14 @@
+#DATABASE PROPERTIES
+dataSource:
+  driverClassName: org.h2.Driver
+  url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+  username: sa
+  dialect: org.hibernate.dialect.H2Dialect
+  hbm2ddlAuto: none
+  package: jshop.model
+
+#LOGGER PROPERTIES
+logging:
+  level.org.springframework.web: DEBUG
+  level.org.hibernate: INFO
+  file: logger.log
