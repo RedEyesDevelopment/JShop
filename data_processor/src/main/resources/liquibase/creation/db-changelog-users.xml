@@ -1,33 +1,70 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+http://www.liquibase.org/xml/ns/dbchangelog ">
 
     <changeSet id="create_users" author="sharabaddin">
         <createTable tableName="granted_authority">
             <column name="id" type="int">
-                <constraints primaryKey="true" nullable="false" />
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="authority" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
 
-    <changeSet id="create_employee" author="sheng.w">
-        <createTable tableName="employee">
-            <column name="id" type="int">
+    <changeSet id="create_users" author="sharabaddin">
+        <addAutoIncrement columnDataType="int"
+                          columnName="id"
+                          incrementBy="1"
+                          startWith="100"
+                          tableName="user"/>
+
+        <createTable tableName="users">
+            <column name="id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="emp_name" type="varchar(50)">
-                <constraints nullable="false" />
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
             </column>
-            <column name="dept" type="int"/>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_enum_granted_authority" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="regdate" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment" type="varchar(255)">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_users" author="sharabaddin">
+        <createTable tableName="users-to-authorities">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="auth_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 
     <changeSet id="tag-1.0" author="sheng.w">
-        <tagDatabase tag="1.0" />
+        <tagDatabase tag="1.0"/>
     </changeSet>
 
 </databaseChangeLog>
