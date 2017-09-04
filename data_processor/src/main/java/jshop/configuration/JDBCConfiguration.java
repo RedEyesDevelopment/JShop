@@ -1,6 +1,7 @@
 package jshop.configuration;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import jshop.services.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -94,5 +95,11 @@ public class JDBCConfiguration implements TransactionManagementConfigurer {
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
         dataSourceTransactionManager.setDataSource(dataSource());
         return dataSourceTransactionManager;
+    }
+
+    @Bean
+    UserService userService(){
+        UserService service = new UserService();
+        service.
     }
 }

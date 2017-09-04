@@ -1,22 +1,20 @@
 package jshop.services;
 
 import jshop.storage.Cache;
+import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+@Data
 public abstract class AbstractService<T, ID extends Serializable> {
-    private Cache cache;
+    private JpaRepository<T, ID> cache;
     private List<TelemetryService> telemetries;
-
-    public AbstractService(Cache cache, List<TelemetryService> telemetries) {
-        this.cache = cache;
-        this.telemetries = telemetries;
-    }
 
     public List findAllSortBy(Sort sort) throws Exception {
         try {
