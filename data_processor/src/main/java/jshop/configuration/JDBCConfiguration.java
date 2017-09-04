@@ -5,16 +5,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
-import projectpackage.repository.reacteav.ReactEAVManager;
-import projectpackage.repository.reacteav.support.ReactConstantConfiguration;
-import projectpackage.repository.reacteav.support.ReactEntityValidator;
-import projectpackage.repository.support.RollbackableTransactionalCustomizer;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -89,7 +83,6 @@ public class JDBCConfiguration implements TransactionManagementConfigurer {
         comboPooledDataSource.setAutomaticTestTable("c3p0DatabaseTestTable");
         comboPooledDataSource.setForceIgnoreUnresolvedTransactions(true);
         comboPooledDataSource.setAutoCommitOnClose(false);
-        comboPooledDataSource.setConnectionCustomizerClassName(RollbackableTransactionalCustomizer.class.getName());
         comboPooledDataSource.setNumHelperThreads(10);
 
         return comboPooledDataSource;
@@ -102,26 +95,4 @@ public class JDBCConfiguration implements TransactionManagementConfigurer {
         dataSourceTransactionManager.setDataSource(dataSource());
         return dataSourceTransactionManager;
     }
-
-    @Bean
-    NamedParameterJdbcTemplate namedParameterJdbcTemplate(){
-        return new NamedParameterJdbcTemplate(dataSource());
-    }
-
-    @Bean
-    JdbcTemplate jdbcTemplate () { return new JdbcTemplate(dataSource()); }
-
-    @Bean
-    ReactConstantConfiguration reactConstantConfiguration() { return new ReactConstantConfiguration(); }
-
-    @Bean
-    ReactEAVManager reactEAVManager(){
-        return new ReactEAVManager(reactConstantConfiguration(),modelPackage);
-    }
-
-    @Bean
-    ReactEntityValidator reactEntityValidator(){
-        return new ReactEntityValidator();
-    }
-
 }
