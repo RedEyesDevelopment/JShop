@@ -7,6 +7,10 @@ dataSource:
   dialect: org.hibernate.dialect.PostgreSQLDialect
   package: jshop.model
 
+cache:
+  names:
+    users: userCache
+
 #LOGGER PROPERTIES
 logging:
   level.org.springframework.web: DEBUG

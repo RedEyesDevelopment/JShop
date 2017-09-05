@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GrantedAuthorityDao extends JpaRepository<GrantedAuthorityEntity, Integer> {
+public interface GrantedAuthorityDao extends JpaRepository<GrantedAuthorityEntity, Integer>, IdentifiableRepository {
 }

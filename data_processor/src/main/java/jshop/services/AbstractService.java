@@ -1,6 +1,7 @@
 package jshop.services;
 
-import jshop.storage.Cache;
+import jshop.model.IdentifiableEntity;
+import jshop.storage.AbstractCacheStorage;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,29 +9,23 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Data
-public abstract class AbstractService<T, ID extends Serializable> {
-    private JpaRepository<T, ID> cache;
+public abstract class AbstractService<T extends IdentifiableEntity, ID extends Serializable> {
+    protected AbstractCacheStorage<T, ID> cache;
     private List<TelemetryService> telemetries;
 
-    public List findAllSortBy(Sort sort) throws Exception {
+    public List<T> saveAll(Collection<T> entities) throws Exception {
         try {
-            return cache.findAll(sort);
-        } catch (Exception e) {
-            sendExceptionTelemetry(e);
-            throw e;
-        }
-    }
-
-    public List saveAll(Collection<T> entities) throws Exception {
-        try {
+            List<T> result = new ArrayList<>();
             for (T t : entities) {
                 preSaveEntityPreparation(t);
+                result.add(cache.save(t));
             }
-            return cache.save(entities);
+            return result;
         } catch (Exception e) {
             sendExceptionTelemetry(e);
             throw e;
@@ -39,16 +34,16 @@ public abstract class AbstractService<T, ID extends Serializable> {
 
     public T getOne(ID id) throws Exception {
         try {
-            return (T) cache.getOne(id);
+            return cache.getOne(id).orElse(null);
         } catch (Exception e) {
             sendExceptionTelemetry(e);
             throw e;
         }
     }
 
-    public Page findAllPageable(Pageable pageable) throws Exception {
+    public Page findPageable(String entityName, Pageable pageable) throws Exception {
         try {
-            return cache.findAll(pageable);
+            return cache.findAll(entityName, pageable);
         } catch (Exception e) {
             sendExceptionTelemetry(e);
             throw e;
@@ -93,22 +88,12 @@ public abstract class AbstractService<T, ID extends Serializable> {
         }
     }
 
-    public void delete(T entity) throws Exception {
+    public void deleteCollection(Collection<ID> ids) throws Exception {
         try {
-            preDeleteEntityPreparation(entity);
-            cache.delete(entity);
-        } catch (Exception e) {
-            sendExceptionTelemetry(e);
-            throw e;
-        }
-    }
-
-    public void deleteCollection(Collection<T> entities) throws Exception {
-        try {
-            for (T t : entities) {
-                preDeleteEntityPreparation(t);
+            for (ID id : ids) {
+                preDeleteEntityByIdPreparation(id);
+                cache.delete(id);
             }
-            cache.delete(entities);
         } catch (Exception e) {
             sendExceptionTelemetry(e);
             throw e;
@@ -118,8 +103,6 @@ public abstract class AbstractService<T, ID extends Serializable> {
     protected void preSaveEntityPreparation(T entity) {
     }
 
-    protected void preDeleteEntityPreparation(T entity) {
-    }
 
     protected void preDeleteEntityByIdPreparation(ID id) {
     }

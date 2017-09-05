@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity(name="users")
-public class UserEntity {
+public class UserEntity implements IdentifiableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
