@@ -29,9 +29,6 @@ http://www.liquibase.org/xml/ns/dbchangelog ">
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="id_enum_granted_authority" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
             <column name="regdate" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
