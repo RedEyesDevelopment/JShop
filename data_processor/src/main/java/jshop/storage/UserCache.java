@@ -23,13 +23,12 @@ public class UserCache extends AbstractCacheStorage<UserEntity, Integer> {
     private String userCacheName;
 
     @Autowired
-    public UserCache(UserDao userDao) {
-        this.jpaRepository = userDao;
-    }
+    UserDao userDao;
 
     @PostConstruct
     private void init(){
         this.self = this;
+        this.jpaRepository = userDao;
         Cache ache = cacheManager.getCache(userCacheName);
         this.cache = ache;
     }

@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface UserDao extends JpaRepository<UserEntity, Integer>, IdentifiableRepository {
     @Override
-    @Query("select p.id from users p")
+    @Query("select p.id from UserEntity p")
     List<Integer> getSortedIds(Pageable pageable);
 }

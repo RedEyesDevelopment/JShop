@@ -7,7 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@Entity(name="users")
+@Entity
+@Table(name = "users")
 public class UserEntity implements IdentifiableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

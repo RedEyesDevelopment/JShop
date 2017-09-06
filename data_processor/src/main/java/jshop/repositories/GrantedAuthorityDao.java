@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface GrantedAuthorityDao extends JpaRepository<GrantedAuthorityEntity, Integer>, IdentifiableRepository {
     @Override
-    @Query("select p.id from granted_authority p")
+    @Query("select p.id from GrantedAuthorityEntity p")
     List<Integer> getSortedIds(Pageable pageable);
 }

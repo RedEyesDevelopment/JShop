@@ -5,17 +5,20 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
         classpath("org.hibernate:hibernate-c3p0:5.2.10.Final")
+        classpath("org.postgresql:postgresql:42.1.4")
     }
 }
 
 plugins {
     id 'org.liquibase.gradle' version '1.2.4'
+    id "pl.softmate.gradle-properties-yaml-plugin" version "0.0.2"
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: "org.liquibase.gradle"
+apply plugin: "pl.softmate.gradle-properties-yaml-plugin"
 
 sourceCompatibility = 1.8
 
@@ -36,13 +39,18 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
 }
 
+bootRun {
+    addResources = true
+}
+
 liquibase {
     activities {
-        main {
-            changeLogFile 'src/main/resources/db-changelog-master.xml'
-            url 'jdbc:postgresql://127.0.0.1:5432/jshop?createDatabaseIfNotExist=true'
+        creation {
+            changeLogFile 'src/main/resources/db-creation.xml'
+            url 'jdbc:postgresql://192.168.99.100:5432/dbadmin'
             username 'dbadmin'
             password 'jEvPjsm'
         }
     }
+    runList = 'creation'
 }

@@ -38,9 +38,6 @@ public class JDBCConfiguration implements TransactionManagementConfigurer {
     @Value("${dataSource.dialect}")
     private String dialect;
 
-    @Value("${cache.names.users}")
-    private String userCache;
-
     public JDBCConfiguration() {
         Locale.setDefault(Locale.ENGLISH);
     }
@@ -104,7 +101,7 @@ public class JDBCConfiguration implements TransactionManagementConfigurer {
 
         Properties jpaProperties = new Properties();
         jpaProperties.put(org.hibernate.cfg.Environment.DIALECT, dialect);
-        jpaProperties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "false");
+//        jpaProperties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "false");
 //        jpaProperties.put("hibernate.cache.region.factory_class",org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory.class);
 //        jpaProperties.put("hibernate.cache.use_second_level_cache", true);
 //        jpaProperties.put("hibernate.cache.use_query_cache", true);

@@ -7,7 +7,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-@Entity(name="granted_authority")
+@Entity
+@Table(name = "granted_authority")
 public class GrantedAuthorityEntity implements IdentifiableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
