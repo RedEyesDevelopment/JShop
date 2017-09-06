@@ -16,14 +16,21 @@ import javax.annotation.PostConstruct;
 public class UserCache extends AbstractCacheStorage<UserEntity, Integer> {
     private AbstractCacheStorage self;
 
+    @Autowired
+    private CacheManager cacheManager;
+
     @Value("${cache.names.users}")
-    private String cacheName;
+    private String userCacheName;
 
     @Autowired
-    @PostConstruct
-    private void init(UserCache userCache, CacheManager cacheManager, UserDao userDao){
-        this.self = userCache;
+    public UserCache(UserDao userDao) {
         this.jpaRepository = userDao;
-        this.cache = cacheManager.getCache(cacheName);
+    }
+
+    @PostConstruct
+    private void init(){
+        this.self = this;
+        Cache ache = cacheManager.getCache(userCacheName);
+        this.cache = ache;
     }
 }

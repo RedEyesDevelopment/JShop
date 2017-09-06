@@ -7,6 +7,5 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface IdentifiableRepository<ID extends Serializable> {
-    @Query("select p.id from #{#entityName} p")
-    List<ID> getSortedIds(String entityName, Pageable pageable);
+    List<ID> getSortedIds( Pageable pageable);
 }

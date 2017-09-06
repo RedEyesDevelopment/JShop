@@ -16,6 +16,6 @@ public class GrantedAuthorityEntity implements IdentifiableEntity{
     @Column(name="authority")
     private String authority;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "users-to-authorities", joinColumns = @JoinColumn(name = "auth_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "users_to_authorities", joinColumns = @JoinColumn(name = "auth_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<UserEntity> users;
 }

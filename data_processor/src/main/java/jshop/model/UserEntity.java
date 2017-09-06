@@ -20,7 +20,7 @@ public class UserEntity implements IdentifiableEntity{
     @Column(name="password")
     private String password;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "users-to-authorities", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "auth_id"))
+    @JoinTable(name = "users_to_authorities", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "auth_id"))
     private List<GrantedAuthorityEntity> authorities;
     @Column(name="regdate")
     private Date regdate;

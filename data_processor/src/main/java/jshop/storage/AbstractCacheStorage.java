@@ -4,16 +4,20 @@ import jshop.model.IdentifiableEntity;
 import jshop.repositories.IdentifiableRepository;
 import jshop.services.AbstractService;
 import lombok.Data;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import net.sf.ehcache.Status;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,9 +47,9 @@ public abstract class AbstractCacheStorage<T extends IdentifiableEntity, ID exte
         }
     }
 
-    public Page<T> findAll(String entityName, Pageable pageable) throws Exception {
+    public Page<T> findAll(Pageable pageable) throws Exception {
         IdentifiableRepository identifiableRepository = (IdentifiableRepository) jpaRepository;
-        List<ID> ids = identifiableRepository.getSortedIds(entityName, pageable);
+        List<ID> ids = identifiableRepository.getSortedIds(pageable);
         List<T> result = new ArrayList<>();
         for (ID currVal : ids) {
             Optional currObj = getOne(currVal);

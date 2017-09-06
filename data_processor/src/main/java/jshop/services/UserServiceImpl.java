@@ -17,7 +17,7 @@ public class UserServiceImpl extends AbstractService<UserEntity, Integer>{
     }
 
     @PostConstruct
-    private void init(UserServiceImpl userService){
-        this.self = userService;
+    private void init(){
+        this.self = this;
     }
 }

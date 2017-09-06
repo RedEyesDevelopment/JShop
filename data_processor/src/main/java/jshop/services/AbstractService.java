@@ -41,9 +41,9 @@ public abstract class AbstractService<T extends IdentifiableEntity, ID extends S
         }
     }
 
-    public Page findPageable(String entityName, Pageable pageable) throws Exception {
+    public Page findPageable(Pageable pageable) throws Exception {
         try {
-            return cache.findAll(entityName, pageable);
+            return cache.findAll(pageable);
         } catch (Exception e) {
             sendExceptionTelemetry(e);
             throw e;

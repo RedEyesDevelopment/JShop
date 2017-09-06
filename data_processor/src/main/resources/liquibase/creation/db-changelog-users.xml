@@ -41,7 +41,7 @@ http://www.liquibase.org/xml/ns/dbchangelog ">
     </changeSet>
 
     <changeSet id="create_users" author="sharabaddin">
-        <createTable tableName="users-to-authorities">
+        <createTable tableName="users_to_authorities">
             <column name="id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -54,7 +54,7 @@ http://www.liquibase.org/xml/ns/dbchangelog ">
         </createTable>
     </changeSet>
 
-    <changeSet id="tag-1.0" author="sheng.w">
+    <changeSet id="tag_1.0" author="sheng.w">
         <tagDatabase tag="1.0"/>
     </changeSet>
 
