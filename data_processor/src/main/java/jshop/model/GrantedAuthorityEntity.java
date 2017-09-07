@@ -1,12 +1,14 @@
 package jshop.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Data
+@ToString(exclude = "users")
 @Entity
 @Table(name = "granted_authority")
 public class GrantedAuthorityEntity implements IdentifiableEntity{

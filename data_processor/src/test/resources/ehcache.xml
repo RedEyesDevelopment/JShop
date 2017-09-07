@@ -15,7 +15,7 @@
     If there are more than 10000 elements it will overflow to the
     disk cache, which in this configuration will go to wherever java.io.tmp is
     defined on your system. On a standard Linux system this will be /tmp" -->
-    <cache name="userCache"
+    <cache name="${cache.names.users}"
            maxEntriesLocalHeap="10000"
            eternal="false"
            timeToIdleSeconds="300" timeToLiveSeconds="600"

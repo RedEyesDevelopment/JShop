@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
@@ -28,7 +29,8 @@ public abstract class AbstractCacheStorage<T extends IdentifiableEntity, ID exte
     protected Cache cache;
     protected JpaRepository<T, ID> jpaRepository;
 
-    public Optional<T> getOne(ID id) throws Exception {
+//    @Transactional
+    public Optional<T> getOne(ID id) {
         if (isAlive()) {
             Element element = cache.get(id);
             if (element != null && !element.isExpired()) {
@@ -47,7 +49,8 @@ public abstract class AbstractCacheStorage<T extends IdentifiableEntity, ID exte
         }
     }
 
-    public Page<T> findAll(Pageable pageable) throws Exception {
+//    @Transactional
+    public Page<T> findAll(Pageable pageable) {
         IdentifiableRepository identifiableRepository = (IdentifiableRepository) jpaRepository;
         List<ID> ids = identifiableRepository.getSortedIds(pageable);
         List<T> result = new ArrayList<>();
@@ -64,25 +67,31 @@ public abstract class AbstractCacheStorage<T extends IdentifiableEntity, ID exte
         return page;
     }
 
-    public T save(T entity) throws Exception {
+//    @Transactional
+    public T save(T entity) {
         T newT = jpaRepository.save(entity);
-        cache.acquireReadLockOnKey(newT.getId());
-        cache.acquireWriteLockOnKey(newT.getId());
-        cache.put(new Element(newT.getId(), newT));
-        cache.releaseWriteLockOnKey(newT.getId());
-        cache.releaseReadLockOnKey(newT.getId());
+        if (cache.isKeyInCache(newT.getId())) {
+            cache.acquireReadLockOnKey(newT.getId());
+            cache.acquireWriteLockOnKey(newT.getId());
+            cache.put(new Element(newT.getId(), newT));
+            cache.releaseWriteLockOnKey(newT.getId());
+            cache.releaseReadLockOnKey(newT.getId());
+        } else {
+            cache.put(new Element(newT.getId(), newT));
+        }
         return newT;
     }
 
-    public boolean exists(ID id) throws Exception {
+    public boolean exists(ID id) {
         return jpaRepository.exists(id);
     }
 
-    public long count() throws Exception {
+    public long count() {
         return jpaRepository.count();
     }
 
-    public void delete(ID id) throws Exception {
+//    @Transactional
+    public void delete(ID id) {
         jpaRepository.delete(id);
         cache.remove(id);
     }

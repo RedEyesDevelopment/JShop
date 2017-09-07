@@ -25,8 +25,8 @@ public class UserEntity implements IdentifiableEntity{
     private List<GrantedAuthorityEntity> authorities;
     @Column(name="regdate")
     private Date regdate;
-    @Column(name="enabled")
-    private boolean enabled;
+    @Column(name="active")
+    private boolean active;
     @Column(name="comment")
     private String comment;
 }

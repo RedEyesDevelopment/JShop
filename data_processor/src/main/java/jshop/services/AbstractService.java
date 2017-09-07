@@ -13,35 +13,34 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Data
 public abstract class AbstractService<T extends IdentifiableEntity, ID extends Serializable> {
     protected AbstractCacheStorage<T, ID> cache;
-    private List<TelemetryService> telemetries;
+    private List<TelemetryService> telemetries = new ArrayList<TelemetryService>();
 
-    public List<T> saveAll(Collection<T> entities) throws Exception {
-        try {
+    public List<TelemetryService> getTelemetriesList() {
+        return telemetries;
+    }
+
+    public void addNewTelemetryService(TelemetryService telemetry) {
+        if (null!=telemetry){
+            this.telemetries.add(telemetry);
+        }
+    }
+
+    public List<T> saveAll(Collection<T> entities) {
             List<T> result = new ArrayList<>();
             for (T t : entities) {
                 preSaveEntityPreparation(t);
                 result.add(cache.save(t));
             }
             return result;
-        } catch (Exception e) {
-            sendExceptionTelemetry(e);
-            throw e;
-        }
     }
 
-    public T getOne(ID id) throws Exception {
-        try {
+    public T getOne(ID id) {
             return cache.getOne(id).orElse(null);
-        } catch (Exception e) {
-            sendExceptionTelemetry(e);
-            throw e;
-        }
     }
 
-    public Page findPageable(Pageable pageable) throws Exception {
+    public Page findPageable(Pageable pageable) {
         try {
             return cache.findAll(pageable);
         } catch (Exception e) {
@@ -50,7 +49,7 @@ public abstract class AbstractService<T extends IdentifiableEntity, ID extends S
         }
     }
 
-    public T save(T entity) throws Exception {
+    public T save(T entity) {
         try {
             preSaveEntityPreparation(entity);
             return (T) cache.save(entity);
@@ -60,7 +59,7 @@ public abstract class AbstractService<T extends IdentifiableEntity, ID extends S
         }
     }
 
-    public boolean exists(ID id) throws Exception {
+    public boolean exists(ID id) {
         try {
             return cache.exists(id);
         } catch (Exception e) {
@@ -69,7 +68,7 @@ public abstract class AbstractService<T extends IdentifiableEntity, ID extends S
         }
     }
 
-    public long count() throws Exception {
+    public long count() {
         try {
             return cache.count();
         } catch (Exception e) {
@@ -78,7 +77,7 @@ public abstract class AbstractService<T extends IdentifiableEntity, ID extends S
         }
     }
 
-    public void delete(ID id) throws Exception {
+    public void delete(ID id) {
         try {
             preDeleteEntityByIdPreparation(id);
             cache.delete(id);
@@ -88,7 +87,7 @@ public abstract class AbstractService<T extends IdentifiableEntity, ID extends S
         }
     }
 
-    public void deleteCollection(Collection<ID> ids) throws Exception {
+    public void deleteCollection(Collection<ID> ids) {
         try {
             for (ID id : ids) {
                 preDeleteEntityByIdPreparation(id);

@@ -3,6 +3,7 @@ package jshop.storage;
 import jshop.model.UserEntity;
 import jshop.repositories.UserDao;
 import lombok.Getter;
+import lombok.Setter;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,11 @@ public class UserCache extends AbstractCacheStorage<UserEntity, Integer> {
     UserDao userDao;
 
     @PostConstruct
-    private void init(){
+    public void init(){
         this.self = this;
         this.jpaRepository = userDao;
-        Cache ache = cacheManager.getCache(userCacheName);
-        this.cache = ache;
+        Cache cache = cacheManager.getCache(userCacheName);
+        this.cache = cache;
+        System.out.println("000");
     }
 }
