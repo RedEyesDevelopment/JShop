@@ -17,7 +17,7 @@
     <changeSet id="users" author="sharabaddin">
         <createTable tableName="users">
             <column name="id" type="SERIAL" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false" />
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
@@ -48,10 +48,172 @@
                 <constraints nullable="false" foreignKeyName="fk_authorities_users" references="users(id)"/>
             </column>
             <column name="auth_id" type="int">
-                <constraints nullable="false" foreignKeyName="fk_authorities__granted_authority" references="granted_authority(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_authorities__granted_authority"
+                             references="granted_authority(id)"/>
             </column>
         </createTable>
     </changeSet>
 
+    <changeSet id="orders_and_news" author="vtamashcuk">
+        <createTable tableName="order_status">
+            <column name="id" type="SERIAL"></column>
+            <column name="name" type="varchar(50)"></column>
+        </createTable>
+
+        <createTable tableName="order_product_amount">
+            <column name="id" type="BIGSERIAL"></column>
+            <column name="amount" type="int"></column>
+        </createTable>
+
+        <createTable tableName="news">
+            <column name="id" type="SERIAL"></column>
+
+            <column name="main_photo" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_news_photos" references="photo(id)"/>
+            </column>
+
+            <column name="text" type="varchar(50)"></column>
+
+            <column name="autor" type="int">
+                <constraints nullable="false" foreignKeyName="fk_news_author" references="users(id)"/>
+            </column>
+
+            <column name="creation_date" type="DATETIME"></column>
+            <column name="page_meta" type="int"></column>
+        </createTable>
+
+        <createTable tableName="photos_to_news">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="news_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_photos_to_news_news_id" references="news(id)"/>
+            </column>
+
+            <column name="photo_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_photos_to_news_photo_id"
+                             references="photo(id)"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="users_to_authorities" author="vtamashcuk">
+        <createTable tableName="slider">
+            <column name="id" type="SERIAL"></column>
+            <column name="enabled" type="BOOLEAN"></column>
+            <column name="photo" type="int"></column>
+            <column name="text" type="varchar(255)"></column>
+            <column name="start_date" type="DATETIME"></column>
+            <column name="end_date" type="DATETIME"></column>
+            <column name="link" type="varchar(255)"></column>
+        </createTable>
+
+        <createTable tableName="sale_amount">
+            <column name="id" type="BIGSERIAL"></column>
+            <column name="name" type="varchar(255)"></column>
+            <column name="quantity" type="int"></column>
+            <column name="price" type="BIGINT"></column>
+            <column name="product" type="int"></column>
+        </createTable>
+
+        <createTable tableName="page_meta">
+            <column name="id" type="SERIAL"></column>
+            <column name="title" type="varchar(255)"></column>
+            <column name="keywords" type="varchar(255)"></column>
+            <column name="description" type="varchar(255)"></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="photo_orders_discoounts" author="sharabaddin">
+        <createTable tableName="photo">
+            <column name="id" type="BIGSERIAL">
+            </column>
+
+            <column name="main_photo" type="int">
+            </column>
+
+            <column name="gallery" type="int">
+            </column>
+
+            <column name="text" type="varchar(255)">
+            </column>
+
+            <column name="author" type="int">
+            </column>
+
+            <column name="creation_date" type="DATETIME">
+            </column>
+
+            <column name="page_meta" type="int">
+            </column>
+        </createTable>
+
+        <createTable tableName="order">
+            <column name="id" type="BIGSERIAL">
+            </column>
+
+            <column name="order_no" type="BIGINT">
+            </column>
+
+            <column name="goods" type="int">
+            </column>
+
+            <column name="order_date" type="DATETIME">
+            </column>
+
+            <column name="shippment_date" type="DATETIME">
+            </column>
+
+            <column name="order_execution_date" type="DATETIME">
+            </column>
+
+            <column name="clienr_comment" type="varchar(255)">
+            </column>
+
+            <column name="clerk_comment" type="varchar(255)">
+            </column>
+
+            <column name="status" type="int">
+            </column>
+
+            <column name="client" type="int">
+            </column>
+
+            <column name="ic_manager" type="int">
+            </column>
+        </createTable>
+
+        <createTable tableName="discount_actions">
+            <column name="id" type="SERIAL">
+            </column>
+
+            <column name="name" type="varchar(255)">
+            </column>
+
+            <column name="description" type="varchar(255)">
+            </column>
+
+            <column name="target_categories" type="int">
+            </column>
+
+            <column name="target_products" type="int">
+            </column>
+
+            <column name="enabled" type="BOOLEAN">
+            </column>
+
+            <column name="from_date" type="DATETIME">
+            </column>
+
+            <column name="type" type="int">
+            </column>
+
+            <column name="author" type="int">
+            </column>
+
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>

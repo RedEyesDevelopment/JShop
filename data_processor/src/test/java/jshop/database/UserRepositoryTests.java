@@ -58,4 +58,12 @@ public class UserRepositoryTests extends AbstractDatabaseTest {
         userServiceImpl.save(newUser);
     }
 
+    @Test
+    public void getUser(){
+        int userId = 2;
+        UserEntity user = userServiceImpl.getOne(userId);
+        System.out.println(SEPARATOR);
+        System.out.println(user);
+    }
+
 }

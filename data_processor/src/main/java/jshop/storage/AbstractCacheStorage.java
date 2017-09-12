@@ -31,16 +31,16 @@ public abstract class AbstractCacheStorage<T extends IdentifiableEntity, ID exte
 
 //    @Transactional
     public Optional<T> getOne(ID id) {
+        System.out.println("GBPLTW");
+
         if (isAlive()) {
             Element element = cache.get(id);
             if (element != null && !element.isExpired()) {
                 return Optional.of((T) element.getObjectValue());
             }
             cache.acquireReadLockOnKey(id);
-            cache.acquireWriteLockOnKey(id);
             T fromDb = jpaRepository.getOne(id);
             cache.put(new Element(id, fromDb));
-            cache.releaseWriteLockOnKey(id);
             cache.releaseReadLockOnKey(id);
             return Optional.ofNullable(fromDb);
         } else {

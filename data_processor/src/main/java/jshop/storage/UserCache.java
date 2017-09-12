@@ -32,6 +32,5 @@ public class UserCache extends AbstractCacheStorage<UserEntity, Integer> {
         this.jpaRepository = userDao;
         Cache cache = cacheManager.getCache(userCacheName);
         this.cache = cache;
-        System.out.println("000");
     }
 }
