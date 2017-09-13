@@ -38,10 +38,12 @@ public abstract class AbstractCacheStorage<T extends IdentifiableEntity, ID exte
             if (element != null && !element.isExpired()) {
                 return Optional.of((T) element.getObjectValue());
             }
-            cache.acquireReadLockOnKey(id);
-            T fromDb = jpaRepository.getOne(id);
+//            cache.acquireReadLockOnKey(id);
+//            cache.acquireWriteLockOnKey(id);
+            T fromDb = jpaRepository.findOne(id);
             cache.put(new Element(id, fromDb));
-            cache.releaseReadLockOnKey(id);
+//            cache.releaseWriteLockOnKey(id);
+//            cache.releaseReadLockOnKey(id);
             return Optional.ofNullable(fromDb);
         } else {
 //            log.error("ERROR! Cache " + cache.getName() + " has status " + cache.getStatus() + ". Fetched entity from database.");

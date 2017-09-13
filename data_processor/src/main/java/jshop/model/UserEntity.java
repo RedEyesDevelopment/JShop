@@ -29,13 +29,4 @@ public class UserEntity implements IdentifiableEntity{
     private boolean active;
     @Column(name="comment")
     private String comment;
-
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }
