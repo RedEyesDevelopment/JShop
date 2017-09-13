@@ -8,6 +8,7 @@ allprojects {
             url="http://repo.spring.io/milestone/"
         }
     }
+
 }
 
 subprojects {

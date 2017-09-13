@@ -1,0 +1,20 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.hazelcast:hazelcast:3.7.2")
+        classpath("com.hazelcast:hazelcast-client:3.7.2")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.hazelcast', name: 'hazelcast', version: '3.7.2'
+    compile group: 'com.hazelcast', name: 'hazelcast-client', version: '3.7.2'
+}
