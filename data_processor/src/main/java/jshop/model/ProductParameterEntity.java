@@ -2,10 +2,10 @@ package jshop.model;
 
 import lombok.Data;
 
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Data
 public abstract class ProductParameterEntity {
-    @OneToMany
+    @ManyToOne
     protected ProductParameter parameter;
 }
