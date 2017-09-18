@@ -54,39 +54,6 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="date_product_parameter_value" author="dyakimov">
-        <createTable tableName="date_product_parameter_value">
-            <column name="id" type="SERIAL" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="data" type="DATETIME">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="int_product_parameter_value" author="dyakimov">
-        <createTable tableName="int_product_parameter_value">
-            <column name="id" type="SERIAL" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="data" type="int">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="float_product_parameter_value" author="dyakimov">
-        <createTable tableName="float_product_parameter_value">
-            <column name="id" type="SERIAL" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="data" type="float">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
     <changeSet id="i18n" author="dyakimov">
         <createTable tableName="i18n">
             <column name="id" type="BIGSERIAL" autoIncrement="true">
@@ -104,6 +71,70 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="product_parameters" author="dyakimov">
+        <createTable tableName="product_parameters">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name_i18n_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_product_parameter_name_to_i18n"
+                             references="i18n(id)"/>
+            </column>
+            <column name="ordinal" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="date_product_parameter_value" author="dyakimov">
+        <createTable tableName="date_product_parameter_value">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="data" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="auth_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_authorities__granted_authority"
+                             references="granted_authority(id)"/>
+            </column>
+            <column name="product_parameter_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_date_product_parameter_value_to_product_parameter"
+                             references="product_parameters(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="int_product_parameter_value" author="dyakimov">
+        <createTable tableName="int_product_parameter_value">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="data" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_parameter_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_int_product_parameter_value_to_product_parameter"
+                             references="product_parameters(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="float_product_parameter_value" author="dyakimov">
+        <createTable tableName="float_product_parameter_value">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="data" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_parameter_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_float_product_parameter_value_to_product_parameter"
+                             references="product_parameters(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
     <changeSet id="string_product_parameter_value" author="dyakimov">
         <createTable tableName="string_product_parameter_value">
             <column name="id" type="BIGSERIAL" autoIncrement="true">
@@ -112,6 +143,10 @@
             <column name="i18n_id" type="bigint">
                 <constraints nullable="false" foreignKeyName="fk_string_product_parameter_to_i18n"
                              references="i18n(id)"/>
+            </column>
+            <column name="product_parameter_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_string_product_parameter_value_to_product_parameter"
+                             references="product_parameters(id)"/>
             </column>
         </createTable>
     </changeSet>
