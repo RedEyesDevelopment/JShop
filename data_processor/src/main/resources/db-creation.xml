@@ -83,6 +83,9 @@
             <column name="ordinal" type="int">
                 <constraints nullable="false"/>
             </column>
+            <column name="category" type="int">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
 

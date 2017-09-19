@@ -23,8 +23,8 @@ import static org.junit.Assert.*;
 @EnableJpaRepositories(basePackageClasses = UserDao.class)
 public class UserRepositoryTests extends AbstractDatabaseTest {
 
-    @Autowired
-    PlatformTransactionManager transactionManager;
+//    @Autowired
+//    PlatformTransactionManager transactionManager;
 
     @Autowired
     UserServiceImpl userServiceImpl;

@@ -16,5 +16,8 @@ public class ProductParameter {
     @JoinColumn(name = "name_i18n_id", unique = true, nullable = false)
     private I18n name;
     @Column(name = "ordinal")
-    protected int ordinal;
+    private int ordinal;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private ProductCategory category;
 }
