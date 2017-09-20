@@ -13,7 +13,7 @@ public class PageMetaEntity implements IdentifiablePersistentObject<Integer> {
     @Column(name = "id")
     private int id;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "name_i18n_id", unique = true, nullable = false)
+    @JoinColumn(name = "title_i18n_id", unique = true, nullable = false)
     private I18nEntity title;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "keywords_i18n_id", unique = true, nullable = true)

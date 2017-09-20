@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name="page_meta")
+@Table(name="photos")
 public class PhotoFileEntity implements IdentifiablePersistentObject<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,6 @@ public class PhotoFileEntity implements IdentifiablePersistentObject<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
     private UserEntity author;
-    @Column(name="uploaded")
+    @Column(name="uploaded", nullable = false)
     private Date uploadedDate;
 }

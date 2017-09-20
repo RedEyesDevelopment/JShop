@@ -154,6 +154,65 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="photos" author="dyakimov">
+        <createTable tableName="photos">
+            <column name="id" type="BIGSERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="directory" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="filename" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="alternative_i18n_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_photos_alternative_to_i18n"
+                             references="i18n(id)"/>
+            </column>
+            <column name="author_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_photos_to_author" references="users(id)"/>
+            </column>
+            <column name="uploaded" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="products_to_photos" author="dyakimov">
+        <createTable tableName="products_to_photos">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_products_to_photos_for_product" references="products(id)"/>
+            </column>
+            <column name="photo_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_products_to_ptohos_for_photos"
+                             references="photos(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="page_meta" author="dyakimov">
+        <createTable tableName="page_meta">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title_i18n_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_pagemeta_title_to_i18n"
+                             references="i18n(id)"/>
+            </column>
+            <column name="keywords_i18n_id" type="bigint">
+                <constraints nullable="true" foreignKeyName="fk_pagemeta_keywords_to_i18n"
+                             references="i18n(id)"/>
+            </column>
+            <column name="description_i18n_id" type="bigint">
+                <constraints nullable="true" foreignKeyName="fk_pagemeta_description_to_i18n"
+                             references="i18n(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
     <changeSet id="products" author="dyakimov">
         <createTable tableName="products">
             <column name="id" type="SERIAL" autoIncrement="true">
@@ -162,7 +221,7 @@
             <column name="code" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="i18n_id" type="bigint">
+            <column name="name_i18n_id" type="bigint">
                 <constraints nullable="false" foreignKeyName="fk_string_product_name_to_i18n" references="i18n(id)"/>
             </column>
             <column name="author_id" type="int">
@@ -175,6 +234,9 @@
                 <constraints nullable="true"/>
             </column>
             <column name="storage" type="bigint">
+            </column>
+            <column name="pagemeta_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_products_to_pagemeta" references="page_meta(id)"/>
             </column>
         </createTable>
     </changeSet>

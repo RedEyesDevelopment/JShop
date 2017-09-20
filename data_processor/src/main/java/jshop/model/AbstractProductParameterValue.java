@@ -9,6 +9,6 @@ import javax.persistence.ManyToOne;
 @Data
 public abstract class AbstractProductParameterValue {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "product_parameter_id")
     protected ProductParameterEntity parameter;
 }

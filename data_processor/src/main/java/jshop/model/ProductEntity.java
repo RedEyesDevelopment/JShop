@@ -43,10 +43,10 @@ public class ProductEntity implements IdentifiablePersistentObject<Integer> {
     private Date createdDate;
     @Column(name = "storage")
     private long storageCount;
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "products_to_photos", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "photo_id"))
-//    private PhotoFileEntity[] photos;
-//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "pagemeta_id", unique = true, nullable = false)
-//    private PageMetaEntity metadata;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "products_to_photos", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "photo_id"))
+    private Set<PhotoFileEntity> photos;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "pagemeta_id", unique = true, nullable = false)
+    private PageMetaEntity metadata;
 }
