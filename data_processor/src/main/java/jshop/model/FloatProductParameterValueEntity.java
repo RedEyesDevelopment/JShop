@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "float_product_parameter")
-public class FloatProductParameterValue extends ProductParameterEntity {
+public class FloatProductParameterValueEntity extends AbstractProductParameterValue implements IdentifiablePersistentObject<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

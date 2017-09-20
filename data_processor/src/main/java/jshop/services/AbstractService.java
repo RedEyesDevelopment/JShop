@@ -1,19 +1,16 @@
 package jshop.services;
 
-import jshop.model.IdentifiableEntity;
+import jshop.model.IdentifiablePersistentObject;
 import jshop.storage.AbstractCacheStorage;
-import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class AbstractService<T extends IdentifiableEntity, ID extends Serializable> {
+public abstract class AbstractService<T extends IdentifiablePersistentObject, ID extends Serializable> {
     protected AbstractCacheStorage<T, ID> cache;
     private List<TelemetryService> telemetries = new ArrayList<TelemetryService>();
 

@@ -1,10 +1,13 @@
 package jshop.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "i18n")
-public class I18n {
+public class I18nEntity implements IdentifiablePersistentObject<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")

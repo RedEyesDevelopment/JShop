@@ -4,14 +4,13 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Data
 @ToString(exclude = "users")
 @Entity
 @Table(name = "granted_authority")
-public class GrantedAuthorityEntity implements IdentifiableEntity{
+public class GrantedAuthorityEntity implements IdentifiablePersistentObject<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")

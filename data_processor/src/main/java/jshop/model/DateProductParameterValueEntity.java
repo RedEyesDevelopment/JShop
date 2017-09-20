@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "date_product_parameter_value")
-public class DateProductParameterValue extends ProductParameterEntity {
+public class DateProductParameterValueEntity extends AbstractProductParameterValue implements IdentifiablePersistentObject<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

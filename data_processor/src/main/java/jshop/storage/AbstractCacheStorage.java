@@ -1,31 +1,19 @@
 package jshop.storage;
 
-import jshop.model.IdentifiableEntity;
+import jshop.model.IdentifiablePersistentObject;
 import jshop.repositories.IdentifiableRepository;
-import jshop.services.AbstractService;
-import lombok.Data;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import net.sf.ehcache.Status;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static java.util.Optional.ofNullable;
-
-public abstract class AbstractCacheStorage<T extends IdentifiableEntity, ID extends Serializable> {
+public abstract class AbstractCacheStorage<T extends IdentifiablePersistentObject, ID extends Serializable> {
     protected Cache cache;
     protected JpaRepository<T, ID> jpaRepository;
 

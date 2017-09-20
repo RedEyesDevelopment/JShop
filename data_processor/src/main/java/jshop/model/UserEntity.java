@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "users")
-public class UserEntity implements IdentifiableEntity{
+public class UserEntity implements IdentifiablePersistentObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
