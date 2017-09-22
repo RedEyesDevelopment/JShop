@@ -1,0 +1,21 @@
+.carousel-indicators li {
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 30px;
+  background-color: #869791;
+}
+.carousel-indicators li:hover {
+  cursor: pointer;
+}
+.carousel-indicators .active {
+  background-color: #4fbfa8;
+}
+.carousel-indicators {
+  justify-content: flex-end;
+  margin-left: 2%;  
+  margin-right: 2%;
+}
+#carouselExampleIndicators {
+  width: 80%;
+  margin: 0 auto;
+}
