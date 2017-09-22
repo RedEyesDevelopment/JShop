@@ -17,7 +17,7 @@
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
+# IDE - VSCode !!! lol, eto redactor :))
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -40,3 +40,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+# Node modules
+/node_modules/*.*
