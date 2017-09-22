@@ -2,12 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { AppSlider } from './app.slider';
+import { HeaderComponent } from './header/header.component';
+import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppSlider
+    HeaderComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule

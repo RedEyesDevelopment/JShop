@@ -1,0 +1,19 @@
+#headerJShop {
+  padding: 0 19.3%;
+  min-height: 70px;
+  margin-bottom: 30px;
+  background-color: #fff!important;
+}
+#navbarSupportedContent, .navbar-nav, .nav-item, .active, .nav-link {
+  min-height: 70px;
+}
+.nav-link {
+  padding-top: 1.4rem;
+}
+.active a{
+  color: #555555;
+  background-color: #4fbfa8;
+}
+.navbar-nav {
+  height: 100%;
+}
