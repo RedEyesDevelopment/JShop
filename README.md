@@ -1,4 +1,5 @@
-# JShop
+# JShop   
+[![Build Status](https://travis-ci.org/RedEyesDevelopment/JShop.svg?branch=master)](https://travis-ci.org/RedEyesDevelopment/JShop)
 
 Github: https://github.com/RedEyesDevelopment/JShop
 
