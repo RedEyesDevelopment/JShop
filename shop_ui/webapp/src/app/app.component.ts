@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {RestServiceComponent} from './rest-service/rest-service.component';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,9 @@ import { Component } from '@angular/core';
 `]
 })
 export class AppComponent {
-  
+
+  constructor(private rest: RestServiceComponent) {
+    this.rest.post('sf');
+  }
 }
+
